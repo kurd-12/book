@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داستانی سێ شانشینەکە - بەرگی یەکەم</title>
+    <style>
+        :root {
+            --bg-color: #f4ecd8;
+            --container-bg: #fffdf9;
+            --text-color: #2c221e;
+            --gold-color: #8b6508;
+            --accent-color: #5c1d1d;
+            --border-color: #d3c298;
+        }
+
+        body {
+            font-family: 'Tahoma', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .book-container {
+            background-color: var(--container-bg);
+            max-width: 850px;
+            width: 100%;
+            min-height: 520px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+            border: 2px solid var(--border-color);
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .book-container::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px dashed var(--border-color);
+            pointer-events: none;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--accent-color);
+            font-size: 2.2em;
+            margin-bottom: 5px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--gold-color);
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--accent-color);
+            margin-top: 10px;
+            border-right: 4px solid var(--gold-color);
+            padding-right: 10px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+
+        blockquote {
+            background-color: #f3ece0;
+            border-right: 4px solid var(--accent-color);
+            margin: 15px 0;
+            padding: 12px 18px;
+            font-style: italic;
+            color: #44332b;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .page-content {
+            flex-grow: 1;
+        }
+
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: #451313;
+        }
+
+        .nav-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            font-weight: bold;
+            color: var(--gold-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="book-container">
+        <div class="page-content" id="pageContent">
+            <!-- ناوەرۆکی لاپەڕەکان لێرە بە جاڤاسکریپت دەگۆڕێن -->
+        </div>
+
+        <div class="page-navigation">
+            <button class="nav-btn" id="prevBtn" onclick="changePage(-1)">پێشوو</button>
+            <span class="page-indicator" id="pageIndicator">لاپەڕەی ١ لە ٨</span>
+            <button class="nav-btn" id="nextBtn" onclick="changePage(1)">دواتر</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = [
+            // لاپەڕەی 1: بەرگ
+            `
+            <div style="text-align: center; padding-top: 60px;">
+                <h1>داستانی سێ شانشینەکە</h1>
+                <h2>بەرگی یەکەم: کڵپەی ئاگر و سێبەری مێژوو</h2>
+                <p style="text-align: center; color: #666; margin-top: 80px; font-style: italic; font-size: 1.2em;">"مێژوو بە خوێن و شمشێر دەنووسرێت..."</p>
+                <div style="text-align: center; color: var(--gold-color); margin-top: 50px; font-size: 1.5em;">***</div>
+            </div>
+            `,
+            // لاپەڕەی 2: پێشەکی
+            `
+            <h3>پێشەکی: نامە بەڕێکەوتووەکەی شەوە سەردەکان</h3>
+            <p>هەندێک جار مێژوو بە قەلەم نانووسرێت. بە خوێن دەنووسرێت. بە دەسەڵات و هێز دەنووسرێت. بە شمشێرێک دەنووسرێت کە لە شەویەکی تاریکدا لە غەلاف دەردەهێنرێت، بە بڕیارێک کە چارەنووسی هەزاران مرۆڤ دەگۆڕێت، یان بە نامەیەک کە لە کاتێکی هەستیاردا دەگاتە دەستی پاشا.</p>
+            <p>لەو شەوەدا، هیچ کەس نەیدەزانی مێژوو دەستی بە نووسین کردووە. شەوێکی سارد و تاریک بوو. با بەسەر دشتەکاندا دەهات و سوارچاکێک بە تەنیا بەرەو ئارکێسیا (پایتەختی شانشینی سانارۆ) دەچوو.</p>
+            <p>ناوی سوارچاکەکە <strong>مۆمۆ</strong> بوو؛ دەستەڕاستی جەنەرال <strong>گۆکتۆ</strong>ی پارێزەری سنوورەکان. لە ژێر جلەکەی نامەیەکی هەبوو بۆ پاشا <strong>بارۆس</strong>، و فەرمانی پێدرا بوو بە هیچ نرخێک مەهێڵێت بکەوێتە دەستی کەسێکی تر.</p>
+            `,
+            // لاپەڕەی 3: بەشی یەکەم
+            `
+            <h3>بەشی یەکەم: نامەکەی سنوور و کۆبوونەوەی دیوان</h3>
+            <p>پاشا بارۆس مۆری نامەکەی شکاند و داوای لە جەنەرال <strong>گواردن</strong> کرد نامەکە لەبەردەم دیوان و حەوت جەنەرالەکە بخوێنێتەوە:</p>
+            <blockquote>
+                <strong>دەقی نامەکە بۆ پاشای گەورەی سانارۆ، پاشا بارۆس</strong><br>
+                گەورەم، سێ ڕۆژە ناوچەکانی ڕاوین و زێرکان کەوتوونەتە ناو جەنگێکی قورس لەگەڵ ٥٠٠ هەزار سەربازی هانگ بە سەرکردایەتیی جەنەرال فۆگە و دۆندا. داوای ئازووقە و هێزی پشتیوانی دەکەم.<br>
+                <em>جەنەرال گۆکتۆ</em>
+            </blockquote>
+            <p>سەبارەت بەم مەترسییە، بە بڕیاری پاشا هێزێکی گەورە پێک هات بۆ پشتیوانی: جەنەرال <strong>ڤیسن</strong> (ڕێوی سانارۆ) بە ٢٠ هەزار سەرباز، بانجی، و سێڤنا بە ٢ هەزار تیرهاوێژ بەرەو سنوور بەڕێکەوتن.</p>
+            `,
+            // لاپەڕەی 4: بەشی دووەم
+            `
+            <h3>بەشی دووەم: قەڵای ڕاوین و دۆزەخی ئاگرین</h3>
+            <p>لە سنوور، جەنەرال گۆکتۆ بە هاوکاریی ڤیسن پلانێکی زیرەکانەی دانا. بە بەکارهێنانی ١٠ بەرمیل مادەی ئاگرین، مەنجەنیق، و قوماشە زەبەلاحەکان، تەڵەیەکی گەورەیان دروست کرد.</p>
+            <p>کاتێک سوپای هانگ هێرشی کرد، قوماشە ئاگرینەکە تەقێنرایەوە و <strong>ئاسمان و زەوی قەڵای ڕاوین بوونە دۆزەخێکی ڕاستەقینە!</strong> سوپای هانگ ٧٠ هەزار سەربازی لەدەست دا، جەنەرال دۆندا بە گالیسکەکەی هەڵات، و ناوچەکە بۆ هەمیشە بوو بە دۆزەخ بۆ دوژمن.</p>
+            `,
+            // لاپەڕەی 5: بەشی سێیەم
+            `
+            <h3>بەشی سێیەم: نامەکەی پاشای کوان</h3>
+            <p>پاشای پیر <strong>وانهی</strong> لە شانشینی کوان نامەیەکی نارد و ڕایگەیاند کە خاکی کوان بێلایەنە و نابێتە گۆڕستانی جەنگ، بەڵام لە ڕۆژهەڵات <strong>دەشتەکانی ناوەڕاست</strong> هەن و دەتوانن لەوێ یەکتر ببینن.</p>
+            <p>لە پایتەختی هانگ، پاشا <strong>ساڤۆ</strong> لە تووڕەییدا فەرمانی دا بە جەنەرال <strong>هوانکۆ</strong> و فۆگە کە سوپا شکاوەکە ڕێکخەنەوە بۆ جەنگێکی یەکلاکەرەوە.</p>
+            `,
+            // لاپەڕەی 6: بەشی چوارەم
+            `
+            <h3>بەشی چوارەم: سوپای کۆنور و دەشتەکان</h3>
+            <p>جەنەرال <strong>کۆنور</strong> بە ١٥ هەزار سوارچاکی شاهانەی جلوبەرگ ئالتونییەوە، لەگەڵ گواردن، ڤیسن و گۆکتۆ، بە کۆی ١٥٠ هەزار سەرباز گەیشتنە دەشتەکانی ناوەڕاست.</p>
+            <p>لە بەرانبەریاندا، سوپای هانگ بە ٤٠٠ هەزار سەرباز دەشتەکەی داپۆشیبوو. جەنگێکی مەزن و سامناک دەستی پێکرد کە تێیدا خەندەق و تەڵە زیرەکانەکانی ڤیسن پێشڕەویی دوژمنی پەکخست.</p>
+            `,
+            // لاپەڕەی 7: بەشی پێنجەم
+            `
+            <h3>بەشی پێنجەم: سەرکەوتنی مێژوویی سانارۆ</h3>
+            <p>لە کۆتایی جەنگەکەدا، سوپای هانگ تێکشکا و نیوەی سەربازەکانی لەدەست دا. گۆکتۆ شمشێرەکەی خستە سەر شانی هوانکۆ و پێی وت: <em>«خاکی سانارۆ بۆ فرۆشتن نییە!»</em></p>
+            <p>گەڕانەوە بۆ پایتەخت پڕ بوو لە شادی، و سەرکەوتنەکە لە هەموو لایەکەوە بڵاو بووەوە.</p>
+            `,
+            // لاپەڕەی 8: بەشی شەشەم و کۆتایی
+            `
+            <h3>بەشی شەشەم: تاریکیی نوێ و دەستپێکی گەشتێکی تر</h3>
+            <p>لە تاریکیی شەوەکاندا، لە دوورترین سنووری خۆرئاوای هانگ، دەنگۆی هاتنی هێزێکی نوێ و نادیار بڵاو بۆوە که هەموو هاوکێشەکانی دەگۆڕی...</p>
+            <div style="text-align: center; margin-top: 40px; font-size: 1.1em; font-weight: bold; color: var(--accent-color);">
+                کۆتایی بەرگی یەکەم
+            </div>
+            `
+        ];
+
+        let currentPage = 0;
+
+        function renderPage() {
+            const contentDiv = document.getElementById('pageContent');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const pageIndicator = document.getElementById('pageIndicator');
+
+            contentDiv.innerHTML = pages[currentPage];
+            pageIndicator.innerText = `لاپەڕەی ${currentPage + 1} لە ${pages.length}`;
+
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === pages.length - 1;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            if (currentPage < 0) currentPage = 0;
+            if (currentPage >= pages.length) currentPage = pages.length - 1;
+            renderPage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        renderPage();
+    </script>
+</body>
+</html>
